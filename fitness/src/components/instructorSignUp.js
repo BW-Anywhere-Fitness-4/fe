@@ -139,8 +139,7 @@ const InstrutorSignUp = props => {
 
     const handleChange = (e) => {
         e.persist();
-        console.log('e.target.name', e.target.name)
-        console.log('e.target.checked', e.target.checked)
+
         // yup.reach will allow us to "reach" into the schema and test only one part.
         // We give reach the schema as the first argument, and the key we want to test as the second.
         Yup
@@ -168,7 +167,8 @@ const InstrutorSignUp = props => {
         //we will still set the state to the new value as the user is typing
 
         if (e.target.id === 'daysAvailable') {
-
+            console.log('e.target.name', e.target.name)
+            console.log('e.target.checked', e.target.checked)
             setSignUpData({
                 ...signUpData,
                 [e.target.id]: {
@@ -176,6 +176,8 @@ const InstrutorSignUp = props => {
                     [e.target.name]: !e.target.checked
                 }
             });
+
+            console.log('signUpData.daysAvailable', signUpData.daysAvailable)
         } else {
             setSignUpData({
                 ...signUpData,
@@ -188,7 +190,7 @@ const InstrutorSignUp = props => {
 
 
 
-        console.log('signUpData.daysAvailable', signUpData.daysAvailable)
+
 
     }
 
