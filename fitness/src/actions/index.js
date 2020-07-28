@@ -1,0 +1,47 @@
+
+
+// for fetching classes
+export const FETCHING_CLASSES ="FETCHING_CLASSES";
+export const FETCHING_CLASS_SUCCESS ="FETCHING_CLASS_SUCCESS";
+export const FETCHING_CLASS_ERROR = "FETCHING_CLASS_ERROR";
+
+// for fetching users
+export const FETCHING_USERS ="FETCHING_USERS";
+export const FETCHING_USERS_SUCCESS = "FETCHING_USERS_SUCCESS";
+export const FETCHING_USERS_ERROR = "FETCHING_USERS_ERROR";
+
+// adding users
+
+export const ADD_USER = "ADD_USER";
+export const ADD_USER_ERROR = "ADD_USER_ERROR";
+export const ADD_USER_SUCCESS = "ADD_USER_SUCCESS";
+
+// adding classes
+
+export const ADD_CLASSES = "ADD_CLASSES";
+export const ADD_CLASSES_SUCCESS = "ADD_CLASSES_SUCCESS";
+export const ADD_CLASSES_ERROR = "ADD_CLASSES_ERROR";
+
+// delete classes
+
+export const DELETE_CLASSES = "DELETE_CLASSES"; 
+export const DELETE_CLASSES_SUCCESS = "DELETE_CLASSES_SUCCESS";
+export const DELETE_CLASSES_ERROR = "DELETE_CLASSES_ERROR"; 
+
+// update classes
+
+export const UPDATE_CLASSES="UPDATE_CLASSES";
+export const UPDATE_CLASSES_SUCCESS="UPDATE_CLASSES_SUCCESS"; 
+export const UPDATE_CLASSES_ERROR = "UPDATE_CLASSES_ERROR";
+
+// login
+
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+
+// register
+
+export const REGISTER_START = "REGISTER_START";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_ERROR = "REGISTER_ERROR";
