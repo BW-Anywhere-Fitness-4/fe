@@ -94,13 +94,13 @@ const InstrutorSignUp = props => {
                 Sunday: false
             },
             TimesofDayAvailable: {
-                Monday: false,
-                Tuesday: false,
-                Wednesday: false,
-                Thursday: false,
-                Friday: false,
-                Saturday: false,
-                Sunday: false,
+                EarlyMorning: false,
+                LateMorning: false,
+                EarlyAfternoon: false,
+                LateAfternoon: false,
+                EarlyEvening: false,
+                LateEvening: false
+
             },
 
         }
@@ -125,13 +125,12 @@ const InstrutorSignUp = props => {
                 Sunday: false,
             },
             TimesofDayAvailable: {
-                Monday: false,
-                Tuesday: false,
-                Wednesday: false,
-                Thursday: false,
-                Friday: false,
-                Saturday: false,
-                Sunday: false,
+                EarlyMorning: false,
+                LateMorning: false,
+                EarlyAfternoon: false,
+                LateAfternoon: false,
+                EarlyEvening: false,
+                LateEvening: false
             },
             terms: ''
         }
@@ -166,33 +165,82 @@ const InstrutorSignUp = props => {
         // Wether or not our validation was successful, 
         //we will still set the state to the new value as the user is typing
 
-        if (e.target.id === 'daysAvailable') {
-            console.log('e.target.name', e.target.name)
-            console.log('e.target.checked', e.target.checked)
-            setSignUpData({
-                ...signUpData,
-                [e.target.id]: {
-                    ...signUpData.daysAvailable,
-                    [e.target.name]: !e.target.checked
-                }
-            });
-
-            console.log('signUpData.daysAvailable', signUpData.daysAvailable)
-        } else {
-            setSignUpData({
-                ...signUpData,
-                [e.target.id]: e.target.value
-            });
-
-
-        }
 
 
 
+
+        setSignUpData({
+            ...signUpData,
+            [e.target.id]: e.target.value
+        });
+
+
+    }
+
+
+
+    const handleChangeDaysTimeAvailable = (e) => {
+        // console.log('before: signUpData.daysAvailable', signUpData.daysAvailable)
+        // console.log('e.target.name', e.target.name)
+        // console.log('e.target.checked', e.target.checked)
+
+
+
+        // Yup
+        //     .reach(formSchema, e.target.name)
+        //     //we can then run validate using the value
+        //     .validate(e.target.checked)
+        //     // if the validation is successful, we can clear the error message
+        //     .then(valid => {
+        //         setErrors({
+        //             ...errors,
+        //             [e.target.name]: ""
+        //         });
+        //     })
+        //     /* if the validation is unsuccessful, we can set the error message to the message 
+        //       returned from yup (that we created in our schema) */
+        //     .catch(err => {
+        //         setErrors({
+        //             ...errors,
+        //             [e.target.name]: err.errors[0]
+        //         });
+
+        //     });
+
+
+
+        setSignUpData({
+            ...signUpData,
+            [e.target.name]: {
+                ...signUpData.daysAvailable,
+                // [e.target.name]: e.target.checked
+                [e.target.id]: e.target.checked
+            }
+        });
+
+
+        // console.log('signUpData.daysAvailable', signUpData.daysAvailable)
+    }
+
+
+    const handleChangeTimeAvailable = (e) => {
+
+
+
+        setSignUpData({
+            ...signUpData,
+            [e.target.name]: {
+                ...signUpData.TimesofDayAvailable,
+
+                [e.target.id]: e.target.checked
+            }
+        });
 
 
 
     }
+
+
 
     const handleChangeNoYep = (e) => {
         e.persist();
@@ -233,22 +281,15 @@ const InstrutorSignUp = props => {
         terms: Yup
             .boolean()
             .oneOf([true], "You must accept Terms and Conditions"),
-        // verifyPW: Yup
-        //     .string()
-        //     .matches(signUpData.password, "Password does not match")
-        //     .required("Password confirmation is Required")
+
 
         verifyPW: Yup
             .string().oneOf([signUpData.password, null], "Passwords don't match")
             .required('Confirm password is required'),
 
-        daysAvailable: Yup
-            .string()
-            .required('Days available is required'),
 
-        TimesofDayAvailable: Yup
-            .string()
-            .required('Times of day available is required')
+
+
 
     });
 
@@ -257,8 +298,6 @@ const InstrutorSignUp = props => {
         email: "",
         password: "",
         verifyPW: "",
-        daysAvailable: "",
-        TimesofDayAvailable: "",
         terms: ""
     });
 
@@ -270,14 +309,16 @@ const InstrutorSignUp = props => {
         We want to make sure it is all valid before we allow a user to submit
         isValid comes from Yup directly */
         formSchema.isValid(signUpData).then(validForm => {
-
+            console.log('validForm', validForm)
             setButtonDisabled(
                 {
                     ...buttonDisabled,
-                    valid: validForm
+                    // valid: validForm
+                    valid: true
                 }
             );
         });
+        // console.log('signUpData.TimesofDayAvailable', signUpData.TimesofDayAvailable)
 
     }, [signUpData]);
 
@@ -293,7 +334,7 @@ const InstrutorSignUp = props => {
                 hasLabel='true'
                 htmlFor='email'
                 label='Email'
-                required='true'
+                required={true}
                 type='email'
                 value={signUpData.email}
                 handleChange={handleChange}
@@ -306,7 +347,7 @@ const InstrutorSignUp = props => {
                 hasLabel='true'
                 htmlFor='password'
                 label='Password'
-                required='true'
+                required={true}
                 type='password'
                 value={signUpData.password}
                 handleChange={handleChange}
@@ -317,7 +358,7 @@ const InstrutorSignUp = props => {
                 hasLabel='true'
                 htmlFor='verifyPW'
                 label='Confirm password'
-                required='true'
+                required={true}
                 type='password'
                 value={signUpData.verifyPW}
                 handleChange={handleChange}
@@ -350,59 +391,126 @@ const InstrutorSignUp = props => {
                 label='Days Available'
             />
 
+
+
             <MutiCheckbox
                 hasLabel='true'
-                htmlFor='daysAvailable'
+                htmlFor='Monday'
                 label='Monday'
-                name='Monday'
+                name='daysAvailable'
+                checked={signUpData.daysAvailable.Monday}
+                handleChange={handleChangeDaysTimeAvailable}
 
-                handleChange={handleChange}
 
-                value={signUpData.daysAvailable.Monday}
             />
             <MutiCheckbox
                 hasLabel='true'
-                htmlFor='daysAvailable'
+                htmlFor='Tuesday'
                 label='Tuesday'
-                handleChange={handleChange}
+                name='daysAvailable'
+                handleChange={handleChangeDaysTimeAvailable}
                 checked={signUpData.daysAvailable.Tuesday}
             />
             <MutiCheckbox
                 hasLabel='true'
-                htmlFor='daysAvailable'
+                htmlFor='Wednesday'
                 label='Wednesday'
-                handleChange={handleChange}
+                name='daysAvailable'
+                handleChange={handleChangeDaysTimeAvailable}
                 checked={signUpData.daysAvailable.Wednesday}
             />
             <MutiCheckbox
                 hasLabel='true'
-                htmlFor='daysAvailable'
+                htmlFor='Thursday'
                 label='Thursday'
-                handleChange={handleChange}
+                name='daysAvailable'
+                handleChange={handleChangeDaysTimeAvailable}
                 checked={signUpData.daysAvailable.Thursday}
             />
             <MutiCheckbox
                 hasLabel='true'
-                htmlFor='daysAvailable'
+                htmlFor='Friday'
                 label='Friday'
-                handleChange={handleChange}
+                name='daysAvailable'
+                handleChange={handleChangeDaysTimeAvailable}
                 checked={signUpData.daysAvailable.Friday}
             />
             <MutiCheckbox
                 hasLabel='true'
-                htmlFor='daysAvailable'
+                htmlFor='Saturday'
                 label='Saturday'
-                handleChange={handleChange}
+                name='daysAvailable'
+                handleChange={handleChangeDaysTimeAvailable}
                 checked={signUpData.daysAvailable.Saturday}
             />
             <MutiCheckbox
                 hasLabel='true'
-                htmlFor='daysAvailable'
+                htmlFor='Sunday'
                 label='Sunday'
-                handleChange={handleChange}
+                name='daysAvailable'
+                handleChange={handleChangeDaysTimeAvailable}
                 checked={signUpData.daysAvailable.Sunday}
             />
 
+
+
+            <Label
+                hasLabel='true'
+                htmlFor='TimesofDayAvailable'
+                label='Times of Day Available ( EST)'
+            />
+
+            <MutiCheckbox
+                hasLabel='true'
+                htmlFor='EarlyMorning'
+                label='Early Morning'
+                name='TimesofDayAvailable'
+                handleChange={handleChangeTimeAvailable}
+                checked={signUpData.TimesofDayAvailable.EarlyMorning}
+            />
+
+            <MutiCheckbox
+                hasLabel='true'
+                htmlFor='LateMorning'
+                label='Late Morning'
+                name='TimesofDayAvailable'
+                handleChange={handleChangeTimeAvailable}
+                checked={signUpData.TimesofDayAvailable.LateMorning}
+            />
+            <MutiCheckbox
+                hasLabel='true'
+                htmlFor='EarlyAfternoon'
+                label='Early Afternoon'
+                name='TimesofDayAvailable'
+                handleChange={handleChangeTimeAvailable}
+                checked={signUpData.TimesofDayAvailable.EarlyAfternoon}
+            />
+            <MutiCheckbox
+                hasLabel='true'
+                htmlFor='LateAfternoon'
+                label='Late Afternoon'
+                name='TimesofDayAvailable'
+                handleChange={handleChangeTimeAvailable}
+                checked={signUpData.TimesofDayAvailable.LateAfternoon}
+            />
+
+            <MutiCheckbox
+                hasLabel='true'
+                htmlFor='EarlyEvening'
+                label='Early Evening'
+                name='TimesofDayAvailable'
+                handleChange={handleChangeTimeAvailable}
+                checked={signUpData.TimesofDayAvailable.EarlyEvening}
+            />
+
+            <MutiCheckbox
+                hasLabel='true'
+                htmlFor='LateEvening'
+                label='Late Evening'
+                name='TimesofDayAvailable'
+                handleChange={handleChangeTimeAvailable}
+                checked={signUpData.TimesofDayAvailable.LateEvening}
+            />
 
 
             <Styledlabel htmlFor="terms"></Styledlabel>
