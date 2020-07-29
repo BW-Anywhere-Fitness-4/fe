@@ -1,0 +1,12 @@
+
+
+export const ADD_CLASS ="ADD_CLASS";
+export const ADDED = "ADDED";
+
+export const EDIT_CLASS ="EDIT_CLASS";
+export const EDITTING_SUCCESS ="EDITTING_SUCCESS";
+
+export const DELETE_CLASS ="DELETE_CLASS";
+
+export const FETCHING_CLASSES ="FETCHING_CLASSES";
+export const FETCHING_SUCCESS ="FETCHING SUCCESS";
