@@ -1,23 +1,24 @@
-import React,{useState} from "react";
+import React from "react";
+// import Form from "./clientReg";
 
 function Confirmation(props){
-    const [newMember, setNewMember]=useState([]);
+    // const [newMember, setNewMember]=useState([]);
 return(
 <div>
-    <h2>marry had a little lamb</h2>
-</div>
-/* <div>
-    {props.newMember.map(member=>(
-        <div key={member.id}>
-            <p>Name: {member.nameInput}</p>
-            <p>Email: {member.emailInput}</p>
-            <p>Phone Number:{member.phoneInput} </p>
-            <p>Username: {member.userNameInput}</p>
-            <p>Password: {member.passwordInput}</p>
-
+    <h2>Thanks for joining Anywhere fitness! Heres your login info!</h2>
+    {/* <Form newMember={newMember} setNewMember={setNewMember}/> */}
+    
+        {props.newMember.map(member=>( 
+         <div key={member.id}>
+            <p>Name: {member.Full_Name}</p>
+            <p>Email: {member.Email}</p>
+            <p>Phone Number:{member.Phone_Number} </p>
+            <p>Username: {member.Username}</p>
+            <p>Password: {member.Password}</p>
         </div>
-         ))}
- </div>  */
+          ))}
+    
+ </div>  
 
 )
 }

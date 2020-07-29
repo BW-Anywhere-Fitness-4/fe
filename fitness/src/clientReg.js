@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from "react";
-import {Route,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
-import Confirmation from "./confirmation";
 
 
 function Form(props){
@@ -16,69 +15,31 @@ function Form(props){
         Verify_Pass:"",
         Age_Group:"",
         Goals:"",
-        Mon:"",
-        Tues:"",
-        Wed:"",
-        Thurs:"",
-        Fri:"",
-        Sat:"",
-        Sun:"",
-        Mornings:"",
-        Noon:"",
-        Evenings:"",
-        Nights:"",
+        Mon:false,
+        Tues:false,
+        Wed:false,
+        Thurs:false,
+        Fri:false,
+        Sat:false,
+        Sun:false,
+        Mornings:false,
+        Noon:false,
+        Evenings:false,
+        Nights:false,
         Terms:false
     }
 
-    const [formState,setFormState]=useState({
-        Full_Name:"n/a",
-        Email:"n/a",
-        Phone_Number:"n/a",
-        Pref_Cont_Meth:"n/a",
-        Username:"n/a",
-        Password:"n/a",
-        Verify_Pass:"n/a",
-        Age_Group:"n/a",
-        Goals:"n/a",
-        Mon:"n/a",
-        Tues:"n/a",
-        Wed:"n/a",
-        Thurs:"n/a",
-        Fri:"n/a",
-        Sat:"n/a",
-        Sun:"n/a",
-        Mornings:"n/a",
-        Noon:"n/a",
-        Evenings:"n/a",
-        Nights:"n/a",
-        Terms:false
-    })
+    const [formState,setFormState]=useState(defaultState)
 
-    const [errors,setErrors]=useState({...defaultState,terms:""        
-        // Full_Name:"",
-        // Email:"",
-        // Phone_Number:"",
-        // Pref_Cont_Meth:"",
-        // Username:"",
-        // Password:"",
-        // Verify_Pass:"",
-        // Age_Group:"",
-        // Goals:"",
-        // Mon:"",
-        // Tues:"",
-        // Wed:"",
-        // Thurs:"",
-        // Fri:"",
-        // Sat:"",
-        // Sun:"",
-        // Mornings:"",
-        // Noon:"",
-        // Evenings:"",
-        // Nights:"",
-        // Terms:""
-    });
+    const [errors,setErrors]=useState({...defaultState,terms:""});
 
-    const [buttonDisabled,setButtonDisabled]=useState(true);
+    const [buttonDisabled,setButtonDisabled]=useState(true); 
+    
+    const [post, setPost] = useState([]);
+    // const [newMember, setNewMember]=useState([]);
+
+    // const newMember={newMember};
+    // const setNewMember={setNewMember};
 
     const formSchema=Yup.object().shape({
         Full_Name:Yup
@@ -106,34 +67,34 @@ function Form(props){
         Goals:Yup
         .string(),
         Mon: Yup
-        .string(),
+        .boolean(),
         Tues: Yup
-        .string(),
+        .boolean(),
         Wed: Yup
-        .string(),
+        .boolean(),
         Thurs: Yup
-        .string(),
+        .boolean(),
         Fri: Yup
-        .string(),
+        .boolean(),
         Sat: Yup
-        .string(),
+        .boolean(),
         Sun: Yup
-        .string(),
+        .boolean(),
         Mornings: Yup
-        .string(),
+        .boolean(),
         Noon: Yup
-        .string(),
+        .boolean(),
         Evenings: Yup
-        .string(),
+        .boolean(),
         Nights: Yup
-        .string(),
+        .boolean(),
         Terms:Yup
         .boolean()
-        .oneOf([true],"Must Agree to Terms")
+        .oneOf([true],"Must Agree to Terms to become a member")
         
     })
 
-    const [post, setPost] = useState([]);
+   
 
     useEffect(()=>{
         formSchema.isValid(formState).then(valid=> setButtonDisabled(!valid));},[formState]);
@@ -162,12 +123,9 @@ const validation=e=>{
         .validate(e.target.value)
         .then(valid=>{setErrors({...errors,[e.target.name]:''});})
         .catch(err=>{setErrors({...errors,[e.target.name]:err.errors[0]});})
-        // setFormState({
-        //     ...formState,[e.target.name]:e.target.value
-        // });
+
 }
 const inputChange = e => {
-        // e.persist();
 
         const value=e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         setFormState({
