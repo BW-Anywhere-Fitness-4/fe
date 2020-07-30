@@ -15,7 +15,7 @@ const initialItem = {
     max_class_size: ""
 }
 
-const AddClass = props => {
+const AddClass = () => {
     const [item, setItem] = useState(initialItem);
     
     const handleChange = e => {

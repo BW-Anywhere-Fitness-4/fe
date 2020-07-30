@@ -12,13 +12,17 @@ import combineReducers from './reducers/Reducer';
 
 const store = createStore(combineReducers, applyMiddleware(logger, thunk));
 
-const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  rootElement
+  <React.StrictMode>
+    <Provider store={store}>
+      <Router>
+      <App />
+      </Router>
+    </Provider>
+  </React.StrictMode>,
+document.getElementById('root')
 );
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
