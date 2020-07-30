@@ -4,7 +4,11 @@ import axios from "axios";
 import InstructorSignUp from './components/instructorSignUp';
 import InstructorSignIn from './components/instructorSignIn';
 import InstructorConfirmation from './components/instructorConfirmation';
-import { Route, Switch } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
+import Form from "./clientReg";
+import Login from './login';
+import Home from "./home";
+import Confirmation from './confirmation';
 function App() {
 
   const [dataPic, setdataPic] = useState({ img: '' });
@@ -77,6 +81,9 @@ function App() {
     console.log('dataPic', dataPic)
   }, [dataPic])
 
+
+
+  // const [newMember, setNewMember]=useState([]);
   return (
 
 
@@ -98,6 +105,17 @@ function App() {
         </Route>
 
       </Switch>
+
+      <h1>Anywhere Fitness</h1>
+      <ul>
+        <Link to="/home"><li>Home</li></Link>
+        <Link><li>About</li></Link>
+      </ul>
+      <Route exact path="/home" component={Home} />
+      <Route exact path="/clientReg" component={Form} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/confirmation" component={Confirmation} />
+
     </div>
 
 
