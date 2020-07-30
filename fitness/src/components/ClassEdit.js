@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useParams, useHistory} from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
-import {useHistory} from  'react-router-dom';
-import addClasses from '../actions/addClasses'
-import { connect } from 'react-redux';
+
 const initialItem = {
     class_name: "",
     instructor: "",
@@ -15,26 +14,50 @@ const initialItem = {
     max_class_size: ""
 }
 
-const AddClass = props => {
-    const [item, setItem] = useState(initialItem);
-    const history =useHistory();
+const ClassEdit = props => {
+const history = useHistory();
+const {id} = useParams();
 
-    const handleChange = e => {
-        
-        setItem({
-            ...item,
-            [e.target.name]:e.target.value
-            });
-    }
+const [classes, setClasses] = useState(initialItem)
 
-    const handleSubmit = e => {
-        e.preventDefault();
-      props.addClasses(item);
-      history.push('/classList')
-      
-    }
+useEffect(()=>{
+    axiosWithAuth()
+    .get(`/api/classes/${props.id}`)
+    .then(res =>{
+        setClasses(res.data)
+    })
+    .catch(err =>console.log(err))
+}, [])
+
+const deleteHandler = e => {
+    e.preventDefault();
+    axiosWithAuth()
+    .delete(`/api/classes/${props.id}`)
+    .then(()=>{
+        history.push('/classList')
+    })
+    .catch(err=>console.log(err))
+}
+
+const editHandler = e => {
+    e.preventDefault();
+    axiosWithAuth()
+    .put(`/api/classes/${id}`, classes)
+    .then(()=>{
+        history.push('/classList')
+    })
+    .catch(err=>console.log(err))
+}
+
+const handleChange = e =>{
+    setClasses({
+        ...classes,
+        [event.target.name]: event.target.value
+    });
+}
     return(
-        <form onSubmit={handleSubmit}>
+        <div>
+            <form>
                <label>
                Class name
                <input
@@ -118,13 +141,12 @@ const AddClass = props => {
 
                />               
                </label>
-            <button>Add Class</button>
+            <button onClick={editHandler}>edit Class</button>
+            <br />
+            <br/>
+            <button onClick={handleDelete}> Delete</button>
             
            </form>
-
+        </div>
     )
 }
-const mapStateToProps = state =>{
-    return state;
-}
-export default connect(mapStateToProps, {addClasses})(AddClass);

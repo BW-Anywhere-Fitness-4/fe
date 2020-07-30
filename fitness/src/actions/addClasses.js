@@ -1,14 +1,15 @@
 import {ADD_CLASSES, ADD_CLASSES_SUCCESS, ADD_CLASSES_ERROR} from './index'
 import axiosWithAuth from '../utils/axiosWithAuth'
 
-const addClasses = item => dispatch => {
+const addClasses = id=> dispatch => {
+  
     dispatch({type:ADD_CLASSES});
 
-    return axiosWithAuth()
-    .post('/classes', item)
+    axiosWithAuth()
+    .post('/api/classes', id)
     .then(res =>{
         console.log(res);
-        dispatch({type:ADD_CLASSES_SUCCESS, payload: item});
+        dispatch({type:ADD_CLASSES_SUCCESS, payload: res.data});
     })
     .catch(err =>{
         console.log(err);

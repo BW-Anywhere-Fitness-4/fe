@@ -4,7 +4,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 const login = (user, history) => dispatch => {
     dispatch({type: LOGIN_START});
     return axiosWithAuth()
-    .post('/login', user)
+    .post('/api/login', user)
     .then(res => {
         localStorage.setItem('token', res.data.token);
         

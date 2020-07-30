@@ -12,14 +12,8 @@ import {combineReducers} from 'redux';
 
 
 export default combineReducers({
-    addClassReducer,
-    addUserReducer,
-    deleteClassReducer,
-    fetchClassesReducer,
-    fetchUserReducer,
-    loginReducer,
-    registerReducer,
-    updateReducer
+    addClassReducer
+
 });
 
 

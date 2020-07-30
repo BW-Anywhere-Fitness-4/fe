@@ -14,7 +14,7 @@ export const addClassReducer = (state=addClassState, action) => {
             return {
                 ...state, 
                 addingClass: true,
-                error: null
+                
             };
         case ADD_CLASSES_SUCCESS:
             return {
@@ -25,7 +25,8 @@ export const addClassReducer = (state=addClassState, action) => {
         case ADD_CLASSES_ERROR:
         return {
             ...state,
-            error: "error"
+            addingClass: false,
+            error: action.payload
         }
         default: 
         return state;
