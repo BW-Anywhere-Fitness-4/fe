@@ -94,7 +94,8 @@ function Form(props){
         
     })
 
-   
+   useEffect(()=>{props.clientDataSetup(formState)},[formState])
+
 
     useEffect(()=>{
         formSchema.isValid(formState).then(valid=> setButtonDisabled(!valid));},[formState]);
@@ -103,7 +104,8 @@ function Form(props){
 
     const formSubmit=e=>{
         e.preventDefault();
-        console.log('submitted');
+        console.log('submitted')
+        ;
         
         
         axios
@@ -111,6 +113,7 @@ function Form(props){
             .then((res)=>{ 
                 setPost(res.data);
                 console.log(`Form submitted successfully!`,res.data)
+                
                 props.setNewMember([...props.newMember, res.data]);
             })
             .catch(err=>console.log(err))
@@ -137,6 +140,7 @@ const inputChange = e => {
       };
     // maybe multiple languages for choices
     return(
+        
         <div>
             <form onSubmit={formSubmit} >
                 <h2>Sign up!</h2>
@@ -209,9 +213,9 @@ const inputChange = e => {
                     <input type="checkbox" name="Terms" id="terms" onChange={inputChange} error={errors} />
                 </label>
                 <br></br><br></br>
-                {/* <Link to='/confirmation'> */}
-                    <button disabled={buttonDisabled}>Register</button>
-                {/* </Link> */}
+                <Link to='/confirmation'>
+                    <button disabled={buttonDisabled} >Register</button>
+                </Link>
                 <pre>{JSON.stringify(post, null, 2)}</pre>
             </form>
         </div>
