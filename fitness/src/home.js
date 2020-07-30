@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "./clientReg";
-import Login from './login';
+import Login from './components/login';
 import {Link,Route} from "react-router-dom";
 
 export default function Home(){
