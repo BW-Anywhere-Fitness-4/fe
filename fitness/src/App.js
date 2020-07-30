@@ -1,15 +1,16 @@
+import React,{useState} from 'react';
+import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 
-import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from "axios";
 import InstructorSignUp from './components/instructorSignUp';
 import InstructorSignIn from './components/instructorSignIn';
 import InstructorConfirmation from './components/instructorConfirmation';
-import { Route, Link, Switch } from "react-router-dom";
 import Form from "./clientReg";
-import Login from './login';
+import Login from './components/login';
 import Home from "./home";
 import Confirmation from './confirmation';
+import ClassList from './components/ClassList'
 
 import About from './about';
 
@@ -103,7 +104,7 @@ Password:data.Password})}
 
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
 
     axios.get("https://api.unsplash.com/photos/random?client_id=uSU0O0qzwu23MITwAOwk2HsnTU-62R4sN7_oKX0nFEg")
       .then(res => {
@@ -124,12 +125,11 @@ Password:data.Password})}
     console.log('dataPic', dataPic)
   }, [dataPic])
 
-
+*/
 
   // const [newMember, setNewMember]=useState([]);
 
   return (
-
 
     <div className="App">
 
@@ -137,6 +137,7 @@ Password:data.Password})}
       <nav>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
+        <Link to="/classList"> classList</Link>
       </nav>
       {console.log("Member Data",newMember)}
 
@@ -171,7 +172,9 @@ Password:data.Password})}
 
           <InstructorConfirmation instructorData={instructorData} dataPic={dataPic} />
         </Route>
-
+        <Route exact path ="/classList">
+          <ClassList />
+        </Route>
       </Switch>
 
 
@@ -185,3 +188,25 @@ Password:data.Password})}
 export default App;
 
 
+
+
+   /*  <Router>
+    
+      <h1>Anywhere Fitness</h1>
+      <ul>
+        <Link to="/home"><li>Home</li></Link>
+        <Link to ="/classList">Class List</Link>
+      </ul>
+      <Route exact path="/home" component={Home}/>
+      <Route exact path="/clientReg" component={Form}/>
+      <Route exact path="/login" component={Login}/>
+      <Route exact path="/confirmation" component={Confirmation}/>
+      {/* <button><Link to="/clientReg">Sign up</Link></button>
+      <button><Link to="/login">Login</Link></button>
+    
+      <Route exact path="/clientReg" component={Form}/>
+      <Route exact path="/login" component={Login}/> 
+      
+      
+    </Router>
+  */
