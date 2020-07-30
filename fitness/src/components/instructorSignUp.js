@@ -2,12 +2,15 @@ import React, { ReactDOM, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+
 const Styledlabel = styled.label`
 margin-top: 24px;
 margin-bottom: 8px;
   display: block;
   color: black;
 `;
+
+
 
 const Styledform = styled.form`
 
@@ -40,7 +43,7 @@ display: inline-block;
   white-space: nowrap;
 
   background-color: ${props => (
-        // console.log('style props', props.disabled)
+        // console.log('style props', props)
         props.disabled === false ? '#ffa0a0' : 'gray'
     )
     };
@@ -261,9 +264,11 @@ const InstrutorSignUp = props => {
             email: signUpData.email,
             password: signUpData.password
         });
-        console.log(formData)
+
+
 
     }
+
 
 
 
@@ -312,238 +317,240 @@ const InstrutorSignUp = props => {
             console.log('validForm', validForm)
             setButtonDisabled(
                 {
-                    ...buttonDisabled,
+                    // ...buttonDisabled,
                     // valid: validForm
                     valid: true
                 }
             );
         });
         // console.log('signUpData.TimesofDayAvailable', signUpData.TimesofDayAvailable)
-
+        props.instructorDataSetup(signUpData)
     }, [signUpData]);
 
 
 
     return (
+        <div style={{ backgroundImage: `url(${props.dataPic.img})` }} >
 
 
-        <Styledform >
+            <Styledform >
 
-            <h2>Sign Up</h2>
-            <Input
-                hasLabel='true'
-                htmlFor='email'
-                label='Email'
-                required={true}
-                type='email'
-                value={signUpData.email}
-                handleChange={handleChange}
+                <h2>Sign Up</h2>
+                <Input
+                    hasLabel='true'
+                    htmlFor='email'
+                    label='Email'
+                    required={true}
+                    type='email'
+                    value={signUpData.email}
+                    handleChange={handleChange}
 
-            />
-            {errors.email.length > 0 ? (<p className="error">{errors.email}</p>) : null}
+                />
 
-
-            <Input
-                hasLabel='true'
-                htmlFor='password'
-                label='Password'
-                required={true}
-                type='password'
-                value={signUpData.password}
-                handleChange={handleChange}
-            />
-            {errors.password.length > 0 ? (<p className="error">{errors.password}</p>) : null}
-
-            <Input
-                hasLabel='true'
-                htmlFor='verifyPW'
-                label='Confirm password'
-                required={true}
-                type='password'
-                value={signUpData.verifyPW}
-                handleChange={handleChange}
-            />
-            {errors.verifyPW.length > 0 ? (<p className="error">{errors.verifyPW}</p>) : null}
-
-            <Input
-                hasLabel='true'
-                htmlFor='Specialty'
-                label='Specialty'
-                type='input'
-                value={signUpData.Specialty}
-                handleChange={handleChangeNoYep}
-            />
-
-            <Input
-                hasLabel='true'
-                htmlFor='phoneNumber'
-                label='Phone Number'
-                type='text'
-                value={signUpData.phoneNumber}
-                handleChange={handleChangeNoYep}
-            />
+                {errors.email.length > 0 ? (<p className="error">{errors.email}</p>) : null}
 
 
+                <Input
+                    hasLabel='true'
+                    htmlFor='password'
+                    label='Password'
+                    required={true}
+                    type='password'
+                    value={signUpData.password}
+                    handleChange={handleChange}
+                />
+                {errors.password.length > 0 ? (<p className="error">{errors.password}</p>) : null}
 
-            <Label
-                hasLabel='true'
-                htmlFor='daysAvailable'
-                label='Days Available'
-            />
+                <Input
+                    hasLabel='true'
+                    htmlFor='verifyPW'
+                    label='Confirm password'
+                    required={true}
+                    type='password'
+                    value={signUpData.verifyPW}
+                    handleChange={handleChange}
+                />
+                {errors.verifyPW.length > 0 ? (<p className="error">{errors.verifyPW}</p>) : null}
+
+                <Input
+                    hasLabel='true'
+                    htmlFor='Specialty'
+                    label='Specialty'
+                    type='input'
+                    value={signUpData.Specialty}
+                    handleChange={handleChangeNoYep}
+                />
+
+                <Input
+                    hasLabel='true'
+                    htmlFor='phoneNumber'
+                    label='Phone Number'
+                    type='text'
+                    value={signUpData.phoneNumber}
+                    handleChange={handleChangeNoYep}
+                />
 
 
 
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='Monday'
-                label='Monday'
-                name='daysAvailable'
-                checked={signUpData.daysAvailable.Monday}
-                handleChange={handleChangeDaysTimeAvailable}
-
-
-            />
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='Tuesday'
-                label='Tuesday'
-                name='daysAvailable'
-                handleChange={handleChangeDaysTimeAvailable}
-                checked={signUpData.daysAvailable.Tuesday}
-            />
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='Wednesday'
-                label='Wednesday'
-                name='daysAvailable'
-                handleChange={handleChangeDaysTimeAvailable}
-                checked={signUpData.daysAvailable.Wednesday}
-            />
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='Thursday'
-                label='Thursday'
-                name='daysAvailable'
-                handleChange={handleChangeDaysTimeAvailable}
-                checked={signUpData.daysAvailable.Thursday}
-            />
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='Friday'
-                label='Friday'
-                name='daysAvailable'
-                handleChange={handleChangeDaysTimeAvailable}
-                checked={signUpData.daysAvailable.Friday}
-            />
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='Saturday'
-                label='Saturday'
-                name='daysAvailable'
-                handleChange={handleChangeDaysTimeAvailable}
-                checked={signUpData.daysAvailable.Saturday}
-            />
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='Sunday'
-                label='Sunday'
-                name='daysAvailable'
-                handleChange={handleChangeDaysTimeAvailable}
-                checked={signUpData.daysAvailable.Sunday}
-            />
+                <Label
+                    hasLabel='true'
+                    htmlFor='daysAvailable'
+                    label='Days Available'
+                />
 
 
 
-            <Label
-                hasLabel='true'
-                htmlFor='TimesofDayAvailable'
-                label='Times of Day Available ( EST)'
-            />
-
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='EarlyMorning'
-                label='Early Morning'
-                name='TimesofDayAvailable'
-                handleChange={handleChangeTimeAvailable}
-                checked={signUpData.TimesofDayAvailable.EarlyMorning}
-            />
-
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='LateMorning'
-                label='Late Morning'
-                name='TimesofDayAvailable'
-                handleChange={handleChangeTimeAvailable}
-                checked={signUpData.TimesofDayAvailable.LateMorning}
-            />
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='EarlyAfternoon'
-                label='Early Afternoon'
-                name='TimesofDayAvailable'
-                handleChange={handleChangeTimeAvailable}
-                checked={signUpData.TimesofDayAvailable.EarlyAfternoon}
-            />
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='LateAfternoon'
-                label='Late Afternoon'
-                name='TimesofDayAvailable'
-                handleChange={handleChangeTimeAvailable}
-                checked={signUpData.TimesofDayAvailable.LateAfternoon}
-            />
-
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='EarlyEvening'
-                label='Early Evening'
-                name='TimesofDayAvailable'
-                handleChange={handleChangeTimeAvailable}
-                checked={signUpData.TimesofDayAvailable.EarlyEvening}
-            />
-
-            <MutiCheckbox
-                hasLabel='true'
-                htmlFor='LateEvening'
-                label='Late Evening'
-                name='TimesofDayAvailable'
-                handleChange={handleChangeTimeAvailable}
-                checked={signUpData.TimesofDayAvailable.LateEvening}
-            />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='Monday'
+                    label='Monday'
+                    name='daysAvailable'
+                    checked={signUpData.daysAvailable.Monday}
+                    handleChange={handleChangeDaysTimeAvailable}
 
 
-            <Styledlabel htmlFor="terms"></Styledlabel>
+                />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='Tuesday'
+                    label='Tuesday'
+                    name='daysAvailable'
+                    handleChange={handleChangeDaysTimeAvailable}
+                    checked={signUpData.daysAvailable.Tuesday}
+                />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='Wednesday'
+                    label='Wednesday'
+                    name='daysAvailable'
+                    handleChange={handleChangeDaysTimeAvailable}
+                    checked={signUpData.daysAvailable.Wednesday}
+                />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='Thursday'
+                    label='Thursday'
+                    name='daysAvailable'
+                    handleChange={handleChangeDaysTimeAvailable}
+                    checked={signUpData.daysAvailable.Thursday}
+                />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='Friday'
+                    label='Friday'
+                    name='daysAvailable'
+                    handleChange={handleChangeDaysTimeAvailable}
+                    checked={signUpData.daysAvailable.Friday}
+                />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='Saturday'
+                    label='Saturday'
+                    name='daysAvailable'
+                    handleChange={handleChangeDaysTimeAvailable}
+                    checked={signUpData.daysAvailable.Saturday}
+                />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='Sunday'
+                    label='Sunday'
+                    name='daysAvailable'
+                    handleChange={handleChangeDaysTimeAvailable}
+                    checked={signUpData.daysAvailable.Sunday}
+                />
+
+
+
+                <Label
+                    hasLabel='true'
+                    htmlFor='TimesofDayAvailable'
+                    label='Times of Day Available ( EST)'
+                />
+
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='EarlyMorning'
+                    label='Early Morning'
+                    name='TimesofDayAvailable'
+                    handleChange={handleChangeTimeAvailable}
+                    checked={signUpData.TimesofDayAvailable.EarlyMorning}
+                />
+
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='LateMorning'
+                    label='Late Morning'
+                    name='TimesofDayAvailable'
+                    handleChange={handleChangeTimeAvailable}
+                    checked={signUpData.TimesofDayAvailable.LateMorning}
+                />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='EarlyAfternoon'
+                    label='Early Afternoon'
+                    name='TimesofDayAvailable'
+                    handleChange={handleChangeTimeAvailable}
+                    checked={signUpData.TimesofDayAvailable.EarlyAfternoon}
+                />
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='LateAfternoon'
+                    label='Late Afternoon'
+                    name='TimesofDayAvailable'
+                    handleChange={handleChangeTimeAvailable}
+                    checked={signUpData.TimesofDayAvailable.LateAfternoon}
+                />
+
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='EarlyEvening'
+                    label='Early Evening'
+                    name='TimesofDayAvailable'
+                    handleChange={handleChangeTimeAvailable}
+                    checked={signUpData.TimesofDayAvailable.EarlyEvening}
+                />
+
+                <MutiCheckbox
+                    hasLabel='true'
+                    htmlFor='LateEvening'
+                    label='Late Evening'
+                    name='TimesofDayAvailable'
+                    handleChange={handleChangeTimeAvailable}
+                    checked={signUpData.TimesofDayAvailable.LateEvening}
+                />
+
+
+                <Styledlabel htmlFor="terms"></Styledlabel>
                I agree to the terms and conditions
             <input type="checkbox" id="terms" onChange={handleChange}></input>
 
-            {errors.terms.length > 0 ? (<p className="error">{errors.terms}</p>) : null}
-
-            <Button
-                type='submit'
-                value='submit'
-                text='Sign Up'
-                onClick={handlesubmit}
-                disabled={!buttonDisabled.valid}
-            />
-
-            <Link to="/instructorSignIn">
-                <Button
-
-                    value='submit'
-                    text='Sign In'
-                    link={true}
-                    disabled={false}
-
-                />
-            </Link>
-
+                {errors.terms.length > 0 ? (<p className="error">{errors.terms}</p>) : null}
+                <Link to="/instructorConfirmation">
+                    <Button
+                        type='submit'
+                        value='submit'
+                        text='Sign Up'
+                        onClick={handlesubmit}
+                        link={true}
+                        disabled={!buttonDisabled.valid}
+                    />
+                </Link>
+                <Link to="/instructorSignIn">
+                    <Button
+                        value='submit'
+                        text='Sign In'
+                        link={true}
+                        disabled={false}
+                    />
+                </Link>
 
 
 
 
-        </Styledform>
 
+            </Styledform>
+
+        </div>
     )
 
 
@@ -596,7 +603,7 @@ const Button = props => {
 
 
             >
-                Sign In
+                {props.text}
             </Styledbutton>
 
 
