@@ -17,7 +17,6 @@ function App() {
       <h1>Anywhere Fitness</h1>
       <ul>
         <Link to="/home"><li>Home</li></Link>
-        <Link><li>About</li></Link>
         <Link to ="/classList">Class List</Link>
       </ul>
       <Route exact path="/home" component={Home}/>
