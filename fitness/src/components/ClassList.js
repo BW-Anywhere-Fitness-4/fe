@@ -1,9 +1,20 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+import {Link} from 'react-router-dom';
 import  axiosWithAuth  from '../utils/axiosWithAuth'
-import AddClass from './AddClass'
-import {useHistory} from 'react-router-dom'
+import styled from "styled-components";
 
+const StyledLink2 = styled(Link)`
+  background-color: white;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-left: 15px;
+  margin-right: 40px;
+
+
+`;
 
 class ClassList extends React.Component {
     
@@ -27,12 +38,17 @@ axiosWithAuth()
 })
 .catch(err=>console.log(err))
 }
+clicksubmit=(id)=>{
+this.props.history.push(`/classEdit/${id}`)
+}
     render(){
         return(
-            <div>
+            <div className="ClassListpage">
+                <StyledLink2 to="/addClass">Add Class</StyledLink2>
                 {this.state.classes.map(classes =>{
                     return(
-                        <div key={classes.class_id} >
+                        <div className="box">
+                        <div key={classes.class_id} onClick={()=>{this.clicksubmit(classes.class_id)}} >
                             <h4>Class name: {classes.class_name}</h4> 
                             <p>Instructor name: {classes.instructor}</p>
                             <p>Class date: {classes.class_date}</p>
@@ -44,8 +60,10 @@ axiosWithAuth()
                             <p>Max class Participants: {classes.max_class_size}</p>
 
                         </div>
+                        </div>
                     )
                 })}
+                
                 
             </div>
         )
@@ -53,4 +71,6 @@ axiosWithAuth()
 }
 
 export default ClassList;
+
+
 
