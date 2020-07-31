@@ -3,8 +3,10 @@ import {useParams, useHistory} from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const initialItem = {
+    instructor_id:"",
+    type: "",
     class_name: "",
-    instructor: "",
+    instructor_username: "",
     class_date: "",
     class_time: "",
     duration: "",
@@ -16,14 +18,16 @@ const initialItem = {
 
 const ClassEdit = props => {
 const history = useHistory();
-const {id} = useParams();
 
+const {id} = useParams();
 const [classes, setClasses] = useState(initialItem)
+
 
 useEffect(()=>{
     axiosWithAuth()
-    .get(`/api/classes/${props.id}`)
+    .get(`/api/classes/${id}`)
     .then(res =>{
+        console.log(res)
         setClasses(res.data)
     })
     .catch(err =>console.log(err))
@@ -32,7 +36,7 @@ useEffect(()=>{
 const deleteHandler = e => {
     e.preventDefault();
     axiosWithAuth()
-    .delete(`/api/classes/${props.id}`)
+    .delete(`/api/classes/${id}`)
     .then(()=>{
         history.push('/classList')
     })
@@ -41,6 +45,7 @@ const deleteHandler = e => {
 
 const editHandler = e => {
     e.preventDefault();
+    console.log(classes)
     axiosWithAuth()
     .put(`/api/classes/${id}`, classes)
     .then(()=>{
@@ -52,7 +57,7 @@ const editHandler = e => {
 const handleChange = e =>{
     setClasses({
         ...classes,
-        [event.target.name]: event.target.value
+        [e.target.name]: e.target.value
     });
 }
     return(
@@ -62,7 +67,7 @@ const handleChange = e =>{
                Class name
                <input
                name="class_name"
-               value={item.class_name}
+               value={classes.class_name}
                onChange={handleChange}
 
                />
@@ -71,7 +76,7 @@ const handleChange = e =>{
                Instructor name:
                <input
                name="instructor"
-               value={item.instructor}
+               value={classes.instructor}
                onChange={handleChange}
 
                />
@@ -80,7 +85,7 @@ const handleChange = e =>{
               Class date:
                <input
                name="class_date"
-               value={item.class_date}
+               value={classes.class_date}
                onChange={handleChange}
 
                />
@@ -89,7 +94,7 @@ const handleChange = e =>{
                Class time:
                <input
                name="class_time"
-               value={item.class_time}
+               value={classes.class_time}
                onChange={handleChange}
 
                />
@@ -98,7 +103,7 @@ const handleChange = e =>{
                Class Duration:
                <input
                name="duration"
-               value={item.duration}
+               value={classes.duration}
                onChange={handleChange}
 
                />
@@ -107,7 +112,7 @@ const handleChange = e =>{
                Class Location:
                <input
                name="location"
-               value={item.location}
+               value={classes.location}
                onChange={handleChange}
 
                />
@@ -116,7 +121,7 @@ const handleChange = e =>{
                Class Intensity:
                <input
                name="intensity"
-               value={item.intensity}
+               value={classes.intensity}
                onChange={handleChange}
 
                />
@@ -126,7 +131,7 @@ const handleChange = e =>{
               Currently enrolled?
                <input
                name="number_of_attendees"
-               value={item.number_of_attendees}
+               value={classes.number_of_attendees}
                onChange={handleChange}
 
                />
@@ -136,7 +141,7 @@ const handleChange = e =>{
                  Max class Participants:
                <input
                name="max_class_size"
-               value={item.max_class_size}
+               value={classes.max_class_size}
                onChange={handleChange}
 
                />               
@@ -144,9 +149,10 @@ const handleChange = e =>{
             <button onClick={editHandler}>edit Class</button>
             <br />
             <br/>
-            <button onClick={handleDelete}> Delete</button>
+            <button onClick={deleteHandler}> Delete</button>
             
            </form>
         </div>
     )
 }
+export default ClassEdit;

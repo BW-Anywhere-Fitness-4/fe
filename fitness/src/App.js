@@ -12,7 +12,7 @@ import Home from "./home";
 import Confirmation from './confirmation';
 import ClassList from './components/ClassList'
 import AddClass from './components/AddClass'
-
+import ClassEdit from './components/ClassEdit'
 import About from './about';
 
 function App(props) {
@@ -175,13 +175,15 @@ Password:data.Password})}
 
           <InstructorConfirmation instructorData={instructorData} dataPic={dataPic} />
         </Route>
-        <Route exact path ="/classList">
-          <ClassList />
+        <Route render={(props)=><ClassList {...props} />}exact path ="/classList">
+          
         </Route>
         <Route exact path ="/addClass">
           <AddClass />
         </Route>
-       
+       <Route exact path ="/classEdit/:id">
+         <ClassEdit />
+       </Route>
       </Switch>
 
 
