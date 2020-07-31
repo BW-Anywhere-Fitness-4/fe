@@ -42,7 +42,9 @@ function App(props) {
     last_name: "",
     Email:"",
     Username:"",
-    Password:""}]
+    Password:"",
+    role: ""
+  }]
 
 );
 const clientDataSetup=(data)=>{setNewMember({...newMember,
@@ -50,7 +52,9 @@ const clientDataSetup=(data)=>{setNewMember({...newMember,
   last_name:data.last_name,
   Email:data.Email,
   Username:data.Username,
-  Password:data.Password})}
+  Password:data.Password,
+  role:data.role
+})}
 
 
 
