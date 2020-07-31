@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import  axiosWithAuth  from '../utils/axiosWithAuth'
 import AddClass from './AddClass'
+import {useHistory} from 'react-router-dom'
 
 
 class ClassList extends React.Component {
@@ -9,6 +10,8 @@ class ClassList extends React.Component {
     state = {
         classes: []
     }
+
+    
 componentDidMount(){
     this.getData();
 }
@@ -29,7 +32,7 @@ axiosWithAuth()
             <div>
                 {this.state.classes.map(classes =>{
                     return(
-                        <div key={classes.class_id}>
+                        <div key={classes.class_id} >
                             <h4>Class name: {classes.class_name}</h4> 
                             <p>Instructor name: {classes.instructor}</p>
                             <p>Class date: {classes.class_date}</p>
@@ -43,10 +46,11 @@ axiosWithAuth()
                         </div>
                     )
                 })}
-                <AddClass/>
+                
             </div>
         )
     }
 }
 
 export default ClassList;
+

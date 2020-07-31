@@ -11,6 +11,7 @@ import Login from './components/login';
 import Home from "./home";
 import Confirmation from './confirmation';
 import ClassList from './components/ClassList'
+import AddClass from './components/AddClass'
 
 import About from './about';
 
@@ -138,6 +139,8 @@ Password:data.Password})}
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/classList"> classList</Link>
+        <Link to="/addClass">Add Class</Link>
+        
       </nav>
       {console.log("Member Data",newMember)}
 
@@ -175,6 +178,10 @@ Password:data.Password})}
         <Route exact path ="/classList">
           <ClassList />
         </Route>
+        <Route exact path ="/addClass">
+          <AddClass />
+        </Route>
+       
       </Switch>
 
 
