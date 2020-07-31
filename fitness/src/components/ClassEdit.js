@@ -1,6 +1,43 @@
 import React, {useState, useEffect} from 'react';
 import {useParams, useHistory} from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import styled from 'styled-components';
+
+
+
+const Styledform = styled.form`
+
+
+max-width: 320px;
+padding: 2rem;
+  margin-top: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: remy(380px);
+  background-color: #fff;
+  border-radius: $radius;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+
+  h2{
+    margin-bottom: 3rem;
+  }
+`;
+const Styledlabel = styled.label`
+margin-top: 24px;
+margin-bottom: 8px;
+  display: block;
+  color: black;
+`;
+const StyledInput = styled.input`
+
+padding: 8px;
+width: 80 %;
+border - top: 0;
+border - right: 0;
+border - bottom: 1px solid #bdc3c7;
+border - left: 0;
+transition: border - bottom - color .15s ease -in;
+`;
 
 const initialItem = {
     instructor_id:"",
@@ -62,8 +99,8 @@ const handleChange = e =>{
 }
     return(
         <div>
-            <form>
-               <label>
+            <Styledform>
+               <Styledlabel>
                Class name
                <input
                name="class_name"
@@ -71,87 +108,87 @@ const handleChange = e =>{
                onChange={handleChange}
 
                />
-               </label>
-               <label>
+               </Styledlabel>
+               <Styledlabel>
                Instructor name:
-               <input
+               <StyledInput
                name="instructor"
                value={classes.instructor}
                onChange={handleChange}
 
                />
-               </label>
-              <label>
+               </Styledlabel>
+              <Styledlabel>
               Class date:
-               <input
+               <StyledInput
                name="class_date"
                value={classes.class_date}
                onChange={handleChange}
 
                />
-               </label>
-               <label>
+               </Styledlabel>
+               <Styledlabel>
                Class time:
-               <input
+               <StyledInput
                name="class_time"
                value={classes.class_time}
                onChange={handleChange}
 
                />
-               </label>
-               <label>
+               </Styledlabel>
+               <Styledlabel>
                Class Duration:
-               <input
+               <StyledInput
                name="duration"
                value={classes.duration}
                onChange={handleChange}
 
                />
-               </label>
-               <label>
+               </Styledlabel>
+               <Styledlabel>
                Class Location:
-               <input
+               <StyledInput
                name="location"
                value={classes.location}
                onChange={handleChange}
 
                />
-               </label>
-               <label>
+               </Styledlabel>
+               <Styledlabel>
                Class Intensity:
-               <input
+               <StyledInput
                name="intensity"
                value={classes.intensity}
                onChange={handleChange}
 
                />
-               </label>
+               </Styledlabel>
 
-              <label>
+              <Styledlabel>
               Currently enrolled?
-               <input
+               <StyledInput
                name="number_of_attendees"
                value={classes.number_of_attendees}
                onChange={handleChange}
 
                />
-               </label>
+               </Styledlabel>
 
-                 <label>
+                 <Styledlabel>
                  Max class Participants:
-               <input
+               <StyledInput
                name="max_class_size"
                value={classes.max_class_size}
                onChange={handleChange}
 
                />               
-               </label>
+               </Styledlabel>
             <button onClick={editHandler}>edit Class</button>
             <br />
             <br/>
             <button onClick={deleteHandler}> Delete</button>
             
-           </form>
+           </Styledform>
         </div>
     )
 }

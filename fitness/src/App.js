@@ -1,36 +1,38 @@
 import React,{useState} from 'react';
-import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import { Route, Link, Switch} from "react-router-dom";
 import './App.css';
-import axios from "axios";
-import InstructorSignUp from './components/instructorSignUp';
-import InstructorSignIn from './components/instructorSignIn';
-import InstructorConfirmation from './components/instructorConfirmation';
-import Form from "./clientReg";
+
+
+import Form from "./components/clientReg";
 import Login from './components/login';
-import Home from "./home";
-import Confirmation from './confirmation';
+import Home from "./components/home";
+import Confirmation from './components/confirmation';
 import ClassList from './components/ClassList'
 import AddClass from './components/AddClass'
 import ClassEdit from './components/ClassEdit'
 import About from './about';
 import styled from "styled-components";
 
-const WrapperDiv=styled.div`
-background-image:url(https://i.pinimg.com/originals/ca/13/d7/ca13d709f44fb8937dc5cc86c2d3f0f3.jpg);
-background-size:contain;
 
-color:#C1C5C5;
-padding:1rem;
-`; 
 const Footer=styled.div`
 background:#08090C;
 padding:8vh`;
 
-const StyledHead=styled.h1`
-word-spacing:30rem;
-padding-right:8rem;
-`;
 
+const StyledLink2 = styled(Link)`
+display: inline-block;
+padding: .75rem 1rem;
+margin: 1.618rem;
+font-weight: 400;
+text-align: center;
+text-transform: uppercase;
+color: #fff;
+vertical-align: middle;
+white-space: nowrap;
+background-color:gray;
+
+
+`;
 
 
 
@@ -56,14 +58,13 @@ const clientDataSetup=(data)=>{setNewMember({...newMember,
   return (
     
     <div className="App">
-      <WrapperDiv>
-        <StyledHead>Anywhere Fitness</StyledHead>
+      <div className="wrapper">
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/classList"> classList</Link>
-        <Link to="/addClass">Add Class</Link>
-      </nav></WrapperDiv>
+        <StyledLink2 to="/">Home</StyledLink2>
+        <StyledLink2 to="/about">About</StyledLink2>
+        
+        
+      </nav></div>
       
       <Switch>
         <Route exact path="/clientReg">

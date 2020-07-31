@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
 import {useHistory} from 'react-router-dom';
-import axiosWithAuth from '../utils/axiosWithAuth';
+
 
 const WrapperDiv=styled.div`
 background-image:url(https://lakecountyphysicaltherapy.com/wp-content/uploads/2020/06/AdobeStock_166350907.jpeg);

@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
-import axiosWithAuth from './utils/axiosWithAuth'
+import axiosWithAuth from '../utils/axiosWithAuth'
 
 const WrapperDiv=styled.div`
 background-image:url(https://www.valuesbasedmindset.com/wp-content/uploads/2019/09/kettlebell-class-working-out.jpg);
