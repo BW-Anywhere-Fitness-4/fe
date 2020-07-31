@@ -2,6 +2,8 @@ import React,{useState,useEffect} from "react";
 import * as Yup from "yup";
 import axios from "axios";
 import styled from "styled-components";
+import {useHistory} from 'react-router-dom';
+
 
 const WrapperDiv=styled.div`
 background-image:url(https://lakecountyphysicaltherapy.com/wp-content/uploads/2020/06/AdobeStock_166350907.jpeg);
@@ -35,6 +37,7 @@ export default function Login(){
 
     const [post, setPost] = useState([]);
 
+    const history = useHistory();
 
     const loginSchema=Yup.object().shape({
         Username: Yup.string().required("Must enter Username"),
@@ -54,6 +57,7 @@ export default function Login(){
                 .then((res)=>{ 
                     setPost(res.data);
                     console.log('Form submitted successfully!',res.data)
+                    history.push('/classList')
                 })
                 .catch(err=>console.log(err))
         };
@@ -76,19 +80,33 @@ export default function Login(){
         <form onSubmit={loginSubmit}>
             <label>
                 Username
-                <input type="text" name="Username" id="usernameInput" placeholder="Username" onChange={inputChange} error={errors}/>
+                <input 
+                type="text" 
+                name="Username" 
+                id="usernameInput" 
+                placeholder="Username" 
+                onChange={inputChange} 
+                error={errors}/>
             </label><br></br><br></br>
             <label>
                 Password
-                <input type="text" name="Password" id="passwordInput" placeholder="Password" onChange={inputChange} error={errors}/>
+                <input 
+                type="password" 
+                name="Password" 
+                id="passwordInput" 
+                placeholder="Password" 
+                onChange={inputChange} 
+                error={errors}/>
             </label><br></br><br></br>
             <Button disabled={buttonDisabled}>Login</Button>
-            {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
+            
         </form>
         </FormWrapper>
         </WrapperDiv>
     )
 };
+
+
 
 
 
