@@ -2,6 +2,28 @@ import React,{useState,useEffect} from "react";
 import {Link} from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
+import styled from "styled-components";
+
+const WrapperDiv=styled.div`
+background-image:url(https://www.valuesbasedmindset.com/wp-content/uploads/2019/09/kettlebell-class-working-out.jpg);
+background-size:cover;
+background-repeat:no-repeat;
+`; 
+
+const FormDiv=styled.div`
+background:white;
+color:#2F71A1;
+width:25vw;
+margin-left:37.5vw;
+opacity:85%;
+padding:1rem;
+border-raidus:25%;
+`;
+
+const Button=styled.div`
+background:#45A4F2;
+color:white;
+`;
 
 
 function Form(props){
@@ -140,8 +162,9 @@ const inputChange = e => {
       };
     // maybe multiple languages for choices
     return(
-        
+        <WrapperDiv>
         <div>
+            <FormDiv>
             <form onSubmit={formSubmit} >
                 <h2>Sign up!</h2>
                 <label>Full Name
@@ -189,15 +212,15 @@ const inputChange = e => {
                     <input type="checkbox" id="mon" name="Mon" value="available" onChange={inputChange}/>
                     Monday
                     <input type="checkbox" id="tues" name="Tues" value="available" onChange={inputChange}/>
-                    Tuesday
+                    Tuesday<br></br>
                     <input type="checkbox" id="wed" name="Wed" value="available" onChange={inputChange}/>
                     Wednesday
                     <input type="checkbox" id="thurs" name="Thurs" value="available"  onChange={inputChange}/>
-                    Thursday<br></br><br></br>
+                    Thursday<br></br>
                     <input type="checkbox" id="fri" name="Fri" value="available" onChange={inputChange}/>
                     Friday
                     <input type="checkbox" id="sat" name="Sat" value="available"  onChange={inputChange}/>
-                    Saturday
+                    Saturday<br></br>
                     <input type="checkbox" id="sun" name="Sun" value="available" onChange={inputChange}/>
                     Sunday
                     </label><br></br><br></br> 
@@ -205,20 +228,22 @@ const inputChange = e => {
 
                 <label>
                     <input type="checkbox" id="mornings" name="Mornings" value="available" onChange={inputChange}/>Mornings
-                    <input type="checkbox" id="noon" name="Noon" value="available" onChange={inputChange}/>Noon
+                    <input type="checkbox" id="noon" name="Noon" value="available" onChange={inputChange}/>Noon<br></br>
                     <input type="checkbox" id="evenings" name="Evenings" value="available" onChange={inputChange}/>Evenings
                     <input type="checkbox" id="nights" name="Nights" value="available" onChange={inputChange}/>Nights
-                </label><br></br><br></br><br></br>
+                </label><br></br><br></br>
                 <label>Agree to Terms
                     <input type="checkbox" name="Terms" id="terms" onChange={inputChange} error={errors} />
                 </label>
                 <br></br><br></br>
                 <Link to='/confirmation'>
-                    <button disabled={buttonDisabled} >Register</button>
+                    <Button disabled={buttonDisabled} >Register</Button>
                 </Link>
-                <pre>{JSON.stringify(post, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
             </form>
+            </FormDiv>
         </div>
+        </WrapperDiv>
     )
 }
 

@@ -1,6 +1,13 @@
 import React, { useEffect , useState} from "react";
 import App from "./App";
 import Axios from "axios";
+import styled from "styled-components";
+
+const WrapperDiv=styled.div`
+background-image:url(https://d39l2hkdp2esp1.cloudfront.net/img/photo/160498/160498_00_2x.jpg);
+padding-bottom:770px`;
+
+
 
 function Confirmation(props){
 const [clientInfo,setClientInfo]=useState(
@@ -28,8 +35,9 @@ Terms:false}])
 
 useEffect(()=>{setClientInfo(props.newMember)},[props.newMember])
 return(
-<div> 
-    {console.log("???",clientInfo)}
+    <WrapperDiv>
+
+    {/* {console.log("???",clientInfo)} */}
 <div key={clientInfo.id}>
     <h2>Thanks for joining Anywhere fitness! Heres your user info!</h2>
             <p>Name: {clientInfo.Full_Name}</p>
@@ -38,20 +46,21 @@ return(
             <p>Username: {clientInfo.Username}</p>
             <p>Password: {clientInfo.Password}</p>
         </div>
-
+</WrapperDiv>
     
-        {/* {console.log("thisone",props)} */}
-        {/* {clientInfo.map(member=>( 
-         <div key={member.id}>
-            <p>Name: {member.Full_Name}</p>
-            <p>Email: {member.Email}</p>
-            <p>Phone Number:{member.Phone_Number} </p>
-            <p>Username: {member.Username}</p>
-            <p>Password: {member.Password}</p>
+        /* {console.log("thisone",props)} */
+        /* {clientInfo.map(()=>( 
+         <div key={clientInfo.id}>
+            <p>Name: {clientInfo.Full_Name}</p>
+            <p>Email: {clientInfo.Email}</p>
+            <p>Phone Number:{clientInfo.Phone_Number} </p>
+            <p>Username: {clientInfo.Username}</p>
+            <p>Password: {clientInfo.Password}</p>
         </div>
-          ))} */}
+          ))} */
     
- </div>  
+ 
+ 
 
 )
 }
