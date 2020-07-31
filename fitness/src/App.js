@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
-
 import './App.css';
 import axios from "axios";
 import InstructorSignUp from './components/instructorSignUp';
@@ -14,141 +13,60 @@ import ClassList from './components/ClassList'
 import AddClass from './components/AddClass'
 import ClassEdit from './components/ClassEdit'
 import About from './about';
+import styled from "styled-components";
+
+const WrapperDiv=styled.div`
+background-image:url(https://i.pinimg.com/originals/ca/13/d7/ca13d709f44fb8937dc5cc86c2d3f0f3.jpg);
+background-size:contain;
+
+color:#C1C5C5;
+padding:1rem;
+`; 
+const Footer=styled.div`
+background:#08090C;
+padding:8vh`;
+
+const StyledHead=styled.h1`
+word-spacing:30rem;
+padding-right:8rem;
+`;
+
+
+
 
 function App(props) {
- 
-
-  const [dataPic, setdataPic] = useState({ img: '' });
-  const [instructorData, setInstructorData] = useState(
-    {
-      email: '',
-      password: '',
-      verifyPW: '',
-      Specialty: '',
-      phoneNumber: '',
-      daysAvailable: {
-        Monday: false,
-        Tuesday: false,
-        Wednesday: false,
-        Thursday: false,
-        Friday: false,
-        Saturday: false,
-        Sunday: false,
-      },
-      TimesofDayAvailable: {
-        EarlyMorning: false,
-        LateMorning: false,
-        EarlyAfternoon: false,
-        LateAfternoon: false,
-        EarlyEvening: false,
-        LateEvening: false
-      },
-      terms: ''
-
-    });
- const [newMember, setNewMember]=useState([{
-    Full_Name:"",
+  const [newMember, setNewMember]=useState([{
+    first_name:"",
+    last_name: "",
     Email:"",
-    Phone_Number:"",
-    Pref_Cont_Meth:"",
     Username:"",
-    Password:"",
-    Verify_Pass:"",
-    Age_Group:"",
-    Goals:"",
-    Mon:false,
-    Tues:false,
-    Wed:false,
-    Thurs:false,
-    Fri:false,
-    Sat:false,
-    Sun:false,
-    Mornings:false,
-    Noon:false,
-    Evenings:false,
-    Nights:false,
-    Terms:false}]
+    Password:""}]
 
 );
-  
-const clientDataSetup=(data)=>{setNewMember({...newMember,Full_Name:data.Full_Name,
-Email:data.Email,
-Phone_Number:data.Phone_Number,
-Username:data.Username,
-Password:data.Password})}
-
-  // const newMember={newMember};
-  // const setNewMember={setNewMember};
-
-//   function test(data){
-   
-// setNewMember(data)
-// console.log("works",newMember)
-//   }
-
-  const instructorDataSetup = (Data) => {
-
-
-    setInstructorData({
-
-      ...instructorData,
-      email: Data.email,
-      password: Data.password,
-      verifyPW: Data.verifyPW,
-      Specialty: Data.Specialty,
-      phoneNumber: Data.phoneNumber,
-      daysAvailable: Data.daysAvailable,
-      TimesofDayAvailable: Data.TimesofDayAvailable,
-      terms: Data.terms
-
-    });
-
-  }
-
-  /* useEffect(() => {
-
-    axios.get("https://api.unsplash.com/photos/random?client_id=uSU0O0qzwu23MITwAOwk2HsnTU-62R4sN7_oKX0nFEg")
-      .then(res => {
-
-        console.log('res', res.data.urls.regular);
-        setdataPic({
-          ...dataPic,
-          img: res.data.urls.regular
-        });
+const clientDataSetup=(data)=>{setNewMember({...newMember,
+  first_name:data.first_name,
+  last_name:data.last_name,
+  Email:data.Email,
+  Username:data.Username,
+  Password:data.Password})}
 
 
 
-      })
-
-  }, [])
-
-  useEffect(() => {
-    console.log('dataPic', dataPic)
-  }, [dataPic])
-
-*/
-
-  // const [newMember, setNewMember]=useState([]);
 
   return (
-
+    
     <div className="App">
-
-      <h1>Anywhere Fitness</h1>
+      <WrapperDiv>
+        <StyledHead>Anywhere Fitness</StyledHead>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/classList"> classList</Link>
         <Link to="/addClass">Add Class</Link>
-        
-      </nav>
-      {console.log("Member Data",newMember)}
-
-
-
+      </nav></WrapperDiv>
+      
       <Switch>
-        
-          <Route exact path="/clientReg">
+        <Route exact path="/clientReg">
           <Form newMember={newMember} setNewMember={setNewMember} 
           clientDataSetup={clientDataSetup} 
           />
@@ -163,18 +81,7 @@ Password:data.Password})}
         <Route exact path="/about" component={About}/>
         <Route exact path="/" component={Home}/>
 
-        <Route path="/instructorSignUp">
-          <InstructorSignUp instructorDataSetup={instructorDataSetup} dataPic={dataPic} />
-        </Route>
-
-        <Route path="/instructorSignIn" >
-          <InstructorSignIn instructorDataSetup={instructorDataSetup} dataPic={dataPic} />
-        </Route>
-
-        <Route path="/instructorConfirmation" >
-
-          <InstructorConfirmation instructorData={instructorData} dataPic={dataPic} />
-        </Route>
+        
         <Route render={(props)=><ClassList {...props} />}exact path ="/classList">
           
         </Route>
@@ -185,37 +92,10 @@ Password:data.Password})}
          <ClassEdit />
        </Route>
       </Switch>
-
-
-
+      <Footer><Link>Contact Us</Link></Footer>
     </div>
-
-
+   
   );
 }
 
 export default App;
-
-
-
-
-   /*  <Router>
-    
-      <h1>Anywhere Fitness</h1>
-      <ul>
-        <Link to="/home"><li>Home</li></Link>
-        <Link to ="/classList">Class List</Link>
-      </ul>
-      <Route exact path="/home" component={Home}/>
-      <Route exact path="/clientReg" component={Form}/>
-      <Route exact path="/login" component={Login}/>
-      <Route exact path="/confirmation" component={Confirmation}/>
-      {/* <button><Link to="/clientReg">Sign up</Link></button>
-      <button><Link to="/login">Login</Link></button>
-    
-      <Route exact path="/clientReg" component={Form}/>
-      <Route exact path="/login" component={Login}/> 
-      
-      
-    </Router>
-  */

@@ -10,7 +10,7 @@ const login = (user, history) => dispatch => {
         
 
         dispatch({type:LOGIN_SUCCESS, payload: res.data});
-        history.push('/home');
+        history.push('/classList');
     })
     .catch(err => {
         dispatch({type:LOGIN_ERROR, payload: err})

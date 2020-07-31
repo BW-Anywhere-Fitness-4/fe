@@ -1,25 +1,43 @@
 import React,{useState,useEffect} from "react";
 import * as Yup from "yup";
 import axios from "axios";
-import axiosWithAuth from '../utils/axiosWithAuth';
+import styled from "styled-components";
 import {useHistory} from 'react-router-dom';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
+const WrapperDiv=styled.div`
+background-image:url(https://lakecountyphysicaltherapy.com/wp-content/uploads/2020/06/AdobeStock_166350907.jpeg);
+background-size:cover;
+height:75vh;
+`;
+
+const FormWrapper=styled.div`
+background:white;
+width:25vw;
+margin-left:37.5vw;
+opacity:85%;
+justify-content:center;
+padding:1rem;
+color:#2F71A1;
+`;
+
+const Button=styled.button`
+background:#45A4F2;
+color:white;
+`;
 
 export default function Login(){
     const defaultState={Username:"",Password:""};
-    const [loginState,setLoginState]=useState({
-        Username: "",
-        Password: ""
-    });
+
+    const [loginState,setLoginState]=useState(defaultState);
 
     const [errors,setErrors]=useState({...defaultState});
 
     const [buttonDisabled,setButtonDisabled]=useState(true);
 
     const [post, setPost] = useState([]);
-    
+
     const history = useHistory();
- 
 
     const loginSchema=Yup.object().shape({
         Username: Yup.string().required("Must enter Username"),
@@ -34,13 +52,12 @@ export default function Login(){
             console.log('submitted');
             
             
-            axiosWithAuth()
+            axios
                 .post('https://reqres.in/api/users', loginState)
-                .then(res=>{ 
-                    console.log(res.data)
-                    localStorage.setItem("token", res.data.token)
+                .then((res)=>{ 
+                    setPost(res.data);
+                    console.log('Form submitted successfully!',res.data)
                     history.push('/classList')
-                   
                 })
                 .catch(err=>console.log(err))
         };
@@ -58,6 +75,8 @@ export default function Login(){
            .catch(err=>{setErrors({...errors,[e.target.name]:err.errors[0]});})}
 
     return(
+        <WrapperDiv>
+        <FormWrapper>
         <form onSubmit={loginSubmit}>
             <label>
                 Username
@@ -72,17 +91,18 @@ export default function Login(){
             <label>
                 Password
                 <input 
-                type="text"
-                 name="Password" 
-                 id="passwordInput" 
-                 placeholder="Password" 
-                 onChange={inputChange} 
-                 error={errors}/>
+                type="password" 
+                name="Password" 
+                id="passwordInput" 
+                placeholder="Password" 
+                onChange={inputChange} 
+                error={errors}/>
             </label><br></br><br></br>
-            <button disabled={buttonDisabled}>Login</button>
-            <pre>{JSON.stringify(post, null, 2)}</pre>
+            <Button disabled={buttonDisabled}>Login</Button>
+            
         </form>
-
+        </FormWrapper>
+        </WrapperDiv>
     )
 };
 
