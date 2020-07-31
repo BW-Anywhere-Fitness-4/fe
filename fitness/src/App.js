@@ -104,4 +104,3 @@ const clientDataSetup=(data)=>{setNewMember({...newMember,
 }
 
 export default App;
-

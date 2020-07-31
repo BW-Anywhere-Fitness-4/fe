@@ -38,4 +38,4 @@ export default function Home(){
             <StyledLink2 to="/login">Login</StyledLink2>
         </div>
     )
-}
+
