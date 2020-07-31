@@ -192,4 +192,6 @@ const handleChange = e =>{
         </div>
     )
 }
+ 
 export default ClassEdit;
+

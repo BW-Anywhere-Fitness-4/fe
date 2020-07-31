@@ -33,8 +33,8 @@ function Form(props){
         last_name: "",
         Email:"",
         Username:"",
-        Password:""
-       
+        Password:"",
+        role: ""
        
     }
 
@@ -62,7 +62,9 @@ function Form(props){
         .required("Must Create Username"),
         Password:Yup
         .string()
-        .required("Must Create Password")
+        .required("Must Create Password"),
+        role:Yup
+        .string()
         
         
     })
@@ -111,6 +113,7 @@ const inputChange = e => {
      validation(e)
        
       };
+   
     // maybe multiple languages for choices
     return(
         <WrapperDiv>
@@ -133,6 +136,14 @@ const inputChange = e => {
                 <label>Password
                     <input name="Password" id="passwordInput" placeholder='abc123' onChange={inputChange} error={errors}/>
                 </label><br></br><br></br>
+                <label>Role
+                    <select name="role" id="roleInput" onChange={inputChange}>
+                        <option value="Not specified">Select</option>
+                        <option value="instructor">Instructor</option>
+                        <option value="client">Client</option>
+                       
+                    </select>
+                </label>
               
                <br></br><br></br>
                

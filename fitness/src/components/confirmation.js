@@ -1,6 +1,5 @@
 import React, { useEffect , useState} from "react";
-import App from "../App"
-import Axios from "axios";
+
 import styled from "styled-components";
 
 const WrapperDiv=styled.div`
@@ -16,7 +15,8 @@ const [clientInfo,setClientInfo]=useState(
     last_name: "",
     Email:"",
     Username:"",
-    Password:""
+    Password:"",
+    role:""
 }])
 
 useEffect(()=>{setClientInfo(props.newMember)},[props.newMember])
@@ -31,6 +31,7 @@ return(
             <p>Email: {clientInfo.Email}</p>
             <p>Username: {clientInfo.Username}</p>
             <p>Password: {clientInfo.Password}</p>
+            <p>Role:{clientInfo.role} </p>
         </div>
 </WrapperDiv>
     

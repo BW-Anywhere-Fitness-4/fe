@@ -72,3 +72,5 @@ this.props.history.push(`/classEdit/${id}`)
 
 export default ClassList;
 
+
+
