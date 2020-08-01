@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import SearchCass from "./SearchClass";
 import SearchClass from "./SearchClass";
 import ClassList from "./ClassList";
 
@@ -18,11 +17,11 @@ function HomePage() {
             });
     }, []);
 
-    const handleChange = (event) => {
+    const handleChange = event => {
         setSearch(event.target.value);
     };
 
-    const result = classes.filter((search) => {
+    const result = classes.filter(search => {
         return search.title.toLowerCase().includes(search);
     });
 
@@ -31,22 +30,19 @@ function HomePage() {
             <center>
                 <SearchClass value={search} onChange={handleChange} />
             </center>
-            {result.map((props) => {
+            {result.map(props => {
                 return (
                     <ClassList
-                        class_name={props.class_name}
-                        instructor_id={props.instructor_id}
-                        // class_date={props.class_date}
-                        // class_time={props.class_time}
+                        class_time={props.class_time}
+                        class_date={props.class_date}
                         duration={props.duration}
                         location={props.location}
                         intensity={props.intensity}
                     />
-                )
+                );
             })}
         </div>
-    )
+    );
 }
-
 
 export default HomePage;
