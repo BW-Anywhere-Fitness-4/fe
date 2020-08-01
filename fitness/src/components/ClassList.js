@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import  axiosWithAuth  from '../utils/axiosWithAuth'
 import styled from "styled-components";
+import SearchClass from "./SearchClass";
 
 const StyledLink2 = styled(Link)`
   background-color: white;
