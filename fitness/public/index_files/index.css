@@ -55,3 +55,7 @@ body {
     background-position-x: center;
     background-position-y: center;
 }
+
+h1 {
+    font-size: 70px;
+}
